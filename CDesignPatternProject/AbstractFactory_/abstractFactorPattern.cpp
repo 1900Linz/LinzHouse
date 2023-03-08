@@ -2,13 +2,13 @@
 
 using namespace std;
 
-class Product {
+class item {
 public:
-	virtual ~Product() {}
+	virtual ~item() {}
 	virtual void operation() = 0;
 };
 
-class product_A :public Product
+class product_A :public item
 {
 public:
 	void operation() {
@@ -16,7 +16,7 @@ public:
 	}
 };
 
-class product_B :public Product
+class product_B :public item
 {
 public:
 	void operation() {
@@ -30,18 +30,18 @@ class Factory {
 public:
 
 	virtual ~Factory(){}
-	virtual Product* createProductA() = 0;
-	virtual Product* createProductB() = 0;
+	virtual item* createProductA() = 0;
+	virtual item* createProductB() = 0;
 };
 
 class runFactory : public Factory{
 public:
 
-	Product* createProductA() {
+	item* createProductA() {
 		return new product_A();
 	}
 
-	Product* createProductB() {
+	item* createProductB() {
 		return new product_B();
 	}
 };
@@ -51,8 +51,8 @@ public:
 int main() {
 	Factory* factory = new runFactory();
 
-	Product* productA = factory->createProductA();
-	Product* productB = factory->createProductB();
+	item* productA = factory->createProductA();
+	item* productB = factory->createProductB();
 
 	productA->operation();
 	productB->operation();
